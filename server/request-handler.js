@@ -18,13 +18,13 @@ var requestHandler = function(request, response) {
 
     //JSON.stringify(allMessages);
     if (request.method === 'GET') {
-      headers['Content-Type'] = 'JSON.object';
+      headers['Content-Type'] = 'text/HTML';
       console.log(request);
     } else if (request.method === 'POST') {
           console.log(request)
           allMessages.push(request.data)
           console.log(allMessages)
-    }
+    } 
 //console.log(response);
 //console.log(request);
 //console.log(request.read());
@@ -60,6 +60,7 @@ var requestHandler = function(request, response) {
   // .writeHead() writes to the request line and headers of the response,
   // which includes the status and all headers.
   response.writeHead(statusCode, headers);
+  
 
   // Make sure to always call response.end() - Node may not send
   // anything back to the client until you do. The string you pass to
@@ -86,5 +87,5 @@ var defaultCorsHeaders = {
   'access-control-allow-headers': 'content-type, accept',
   'access-control-max-age': 10 // Seconds.
 };
-module.exports.requestHandler = requestHandler;
+exports.requestHandler = requestHandler;
 
