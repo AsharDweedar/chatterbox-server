@@ -11,6 +11,7 @@ this file and include it in basic-server.js so that it actually works.
 *Hint* Check out the node module documentation at http://nodejs.org/api/modules.html.
 
 **************************************************************/
+//var allMessages = require('./classes/messages/messages.js').allMessages;
 var allMessages = [];
 var requestHandler = function(request, response) {
    
@@ -41,31 +42,26 @@ var requestHandler = function(request, response) {
   //
   // You will need to change this if you are sending something
   // other than plain text, like JSON or HTML.
-  headers['Content-Type'] = 'text/plain';
+  //headers['Content-Type'] = 'text/plain';
+  headers['Content-Type'] = 'application/json';
 
 
 
   var toSend;
-    if (request.method === 'GET') {
-      headers['Content-Type'] = 'application/json';
-      toSend = {
-                  results: allMessages
-                }
-      console.log('GET : ');
-      console.log(request);
+   if (request.method === 'POST') {
       
-    } else if (request.method === 'POST') {
-      allMessages.push(request._postData);
-      toSend = {"results":[]} ;
+      request.on('data', function (data) {
+        console.log(data)
+        allMessages.push(JSON.parse(data));
+      })
+
       statusCode = 201;
-      console.log('POST : ')
-      console.log( response)
-          
+   
     } 
     if (request.url !== '/classes/messages'){
       statusCode = 404;
     }
-
+  
   console.log('all messages : ') 
   console.log(allMessages) 
 
@@ -82,7 +78,13 @@ var requestHandler = function(request, response) {
   //
   // Calling .end "flushes" the response's internal buffer, forcing
   // node to actually send all the data over to the client.
-  response.end(JSON.stringify(toSend));
+  console.log('request : ')
+  console.log( request )
+  console.log('response : ')
+  console.log( response )
+  response.end(JSON.stringify( {
+                  results: allMessages
+                }));
 };
 
 // These headers will allow Cross-Origin Resource Sharing (CORS).

@@ -4,3 +4,7 @@
 [submodule "client/rbk3-chatterbox-client"]
 	path = client/rbk3-chatterbox-client
 	url = https://github.com/hackreactor/rbk3-chatterbox-client.git
+[submodule "clinet side"]
+	path = client/rbk3-chatterbox-client
+	url = https://github.com/hackreactor/rbk3-chatterbox-client.git
+	branch = solution
