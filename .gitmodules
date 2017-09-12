@@ -1,3 +1,6 @@
 [submodule "client/client/rbk3-chatterbox-client"]
 	path = client/client/rbk3-chatterbox-client
 	url = https://github.com/hackreactor/rbk3-chatterbox-client.git
+[submodule "client/rbk3-chatterbox-client"]
+	path = client/rbk3-chatterbox-client
+	url = https://github.com/hackreactor/rbk3-chatterbox-client.git
